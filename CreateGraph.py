@@ -1,4 +1,5 @@
 import networkx as nx
+import sys
 
 def parse_file(file):
     """ Parse wheeler graph (V,E,ordering) from a file path name. """
@@ -17,7 +18,7 @@ def parse_file(file):
             break  # end of vertex section
         vertices = line.split(' ')
         V += vertices
-    
+
     # Parse edges
     E = []
     first_line = fh.readline()
@@ -28,12 +29,11 @@ def parse_file(file):
         line = fh.readline().rstrip()
         if len(line) == 0:
             break  # end of edges section
-        edges = line.split(' ')
+        edges = [l.strip() for l in line.split('(') if l]
         converted_edges = []
         for e in edges:
-            assert(e[0] == '(')
             assert(e[-1] == ')')
-            edge = e[1:-1].split(',')
+            edge = [ed.strip() for ed in e.split(',')]
             converted_edges.append((edge[0], edge[1], {'label': edge[2]}))
         E += converted_edges
 
@@ -62,10 +62,16 @@ def create_network_graph(graph):
     G.add_edges_from(E)
 
     # if order exists, add it as a node attribute
+    for i in range(len(order)):
+        G.nodes[order[i]]['order'] = i
     return G
 
-input = parse_file('data/wheeler.txt')
-G = create_network_graph(input)
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Path name to file must be included")
+    else:
+        input = parse_file(sys.argv[1])
+        G = create_network_graph(input)
 
-print(G.nodes())
-print(G.edges())
+        print(G.nodes.data())
+        print(G.edges.data())

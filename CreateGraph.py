@@ -57,21 +57,34 @@ def parse_file(file):
 
 def create_network_graph(graph):
     V,E,order = graph
-    G = nx.Graph()
+    G = nx.DiGraph()
     G.add_nodes_from(V)
     G.add_edges_from(E)
 
     # if order exists, add it as a node attribute
     for i in range(len(order)):
         G.nodes[order[i]]['order'] = i
-    return G
+    return (G, order)
+
+#checks if the node with 0 in-degree comes first in the ordering
+def check_first_node(graph, order):
+    all_nodes = nx.nodes(graph)
+    first_node = order[0]
+
+    for node in all_nodes:
+        #find the node with 0 in-degree
+        if graph.in_degree(node) == 0:
+            return node == first_node
+    
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Path name to file must be included")
     else:
         input = parse_file(sys.argv[1])
-        G = create_network_graph(input)
+        G,order = create_network_graph(input)
+        first_node_valid = check_first_node(G, order)	
 
         print(G.nodes.data())
         print(G.edges.data())
+        print(first_node_valid)

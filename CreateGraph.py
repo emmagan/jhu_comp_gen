@@ -64,27 +64,14 @@ def create_network_graph(graph):
     # if order exists, add it as a node attribute
     for i in range(len(order)):
         G.nodes[order[i]]['order'] = i
-    return (G, order)
-
-#checks if the node with 0 in-degree comes first in the ordering
-def check_first_node(graph, order):
-    all_nodes = nx.nodes(graph)
-    first_node = order[0]
-
-    for node in all_nodes:
-        #find the node with 0 in-degree
-        if graph.in_degree(node) == 0:
-            return node == first_node
-    
+    return G
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Path name to file must be included")
     else:
         input = parse_file(sys.argv[1])
-        G,order = create_network_graph(input)
-        first_node_valid = check_first_node(G, order)	
+        G = create_network_graph(input)
 
         print(G.nodes.data())
         print(G.edges.data())
-        print(first_node_valid)

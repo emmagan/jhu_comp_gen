@@ -34,7 +34,7 @@ def parse_file(file):
         for e in edges:
             assert(e[-1] == ')')
             edge = [ed.strip() for ed in e.split(',')]
-            converted_edges.append((edge[0], edge[1], {'label': edge[2]}))
+            converted_edges.append((edge[0], edge[1], {'label': edge[2][:-1]}))
         E += converted_edges
 
     # Parse ordering, if it exists

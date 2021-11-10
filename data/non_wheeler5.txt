@@ -1,0 +1,19 @@
+V
+0 1 2 3 4 5 6 7 8 9
+
+E
+(0, 6, t)
+(1, 8, t)
+(2, 4, c)
+(3, 5, g)
+(4, 1, a)
+(6, 2, a)
+(7, 1, a)
+(8, 9, t)
+(9, 3, a)
+
+Ordering
+0 1 2 3 4 5 6 7 8 9
+
+Source
+https://www.cs.jhu.edu/~langmea/resources/lecture_notes/255_wheeler_graph1_pub.pdf

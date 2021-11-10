@@ -3,10 +3,13 @@ import sys
 import itertools
 from CreateGraph import parse_file, create_network_graph
 from GraphVerifier import check_first_node, check_edge_pairs
+from visualize import visualize
 
 def main(file_path):
     input = parse_file(file_path)
     G = create_network_graph(input)
+    visualize(G)
+
     return check_first_node(G) and check_edge_pairs(G)
 
 if __name__ == "__main__":

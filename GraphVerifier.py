@@ -14,7 +14,7 @@ def check_first_node(graph):
 #checks the second and third property of Wheeler Graph
 #returns true if for any pair of edges e = (u, v) and e' = (u', v')
 #labeled a and a' respectively, a < a' => v < v' and (a = a') ^ (u < u') => v <= v'
-#returns false otherwise
+#returns incorrect edge pair otherwise
 def check_edge_pairs(graph):
     all_edges = nx.edges(graph)
     
@@ -28,11 +28,11 @@ def check_edge_pairs(graph):
             #case 2: a and b are diff edges with same labels
             if a_label == b_label:
                 if a[0] < b[0] and a[1] > b[1]:
-                    return False
+                    return (a,b)
             #case 3: a and b are diff edges with diff labels
             elif a_label < b_label:
                 if a[1] >= b[1]:
-                    return False
+                    return (a,b)
     return True
         
     

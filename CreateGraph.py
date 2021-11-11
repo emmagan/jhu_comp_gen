@@ -60,6 +60,10 @@ def create_network_graph(graph):
     G = nx.DiGraph()
     G.add_nodes_from(V)
     G.add_edges_from(E)
+    
+    # set color attribute
+    nx.set_edge_attributes(G,'black',name='color')
+    nx.set_node_attributes(G,'tab:blue',name='color')
 
     # if order exists, add it as a node attribute
     for i in range(len(order)):

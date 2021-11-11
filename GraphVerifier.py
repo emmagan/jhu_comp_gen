@@ -17,6 +17,7 @@ def check_first_node(graph):
 #returns incorrect edge pair otherwise
 def check_edge_pairs(graph):
     all_edges = nx.edges(graph)
+    order = nx.get_node_attributes(graph, 'order')
     
     for a in all_edges:
         for b in all_edges:
@@ -27,11 +28,11 @@ def check_edge_pairs(graph):
             b_label = graph[b[0]][b[1]]['label']
             #case 2: a and b are diff edges with same labels
             if a_label == b_label:
-                if a[0] < b[0] and a[1] > b[1]:
+                if order[a[0]] < order[b[0]] and order[a[1]] > order[b[1]]:
                     return (a,b)
             #case 3: a and b are diff edges with diff labels
             elif a_label < b_label:
-                if a[1] >= b[1]:
+                if order[a[1]] >= order[b[1]]:
                     return (a,b)
     return True
         

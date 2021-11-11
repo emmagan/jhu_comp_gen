@@ -9,6 +9,7 @@ def check_first_node(graph):
     for node in all_nodes:
         #find the node with 0 in-degree
         if graph.in_degree(node) == 0:
+            graph.nodes[node]['color'] = 'tab:blue' if order[node] == 0 else 'red'
             return order[node] == 0
         
 #checks the second and third property of Wheeler Graph

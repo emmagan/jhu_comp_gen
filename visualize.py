@@ -1,4 +1,3 @@
-import matplotlib
 import matplotlib.pyplot as plt
 import networkx as nx
 from itertools import count
@@ -25,4 +24,3 @@ def visualize(G,order):
     nx.draw_networkx_edge_labels(G, pos, edge_labels=formatted_edge_labels,label_pos=0.5, ax=ax)
     
     plt.show()
-

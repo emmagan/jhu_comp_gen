@@ -1,12 +1,23 @@
 class Node:
-    def __init__(self, value):
-        self.val = value
+    def __init__(self, edgeVal):
+        self.edge = edgeVal
+        self.key = 0
         self.children = {}
+    
+    def getChildren(self):
+        return self.children
+    
+    def getEdge(self):
+        return self.edge 
+    
+    def getKey(self):
+        return self.key
 class Trie:
     def __init__(self):
         # sentinel node
         self.root = Node('$')
-
+        self.totalNodes = 1
+        
     def insert(self, word: str) -> None:
         if word == None or len(word) == 0:
             return
@@ -17,6 +28,8 @@ class Trie:
         for w in word:
             if w not in node.children:
                 newNode = Node(w)
+                newNode.key = self.totalNodes
+                self.totalNodes += 1
                 node.children[w] = newNode
                 node = newNode
             else:
@@ -38,3 +51,14 @@ class Trie:
                 node = node.children[w]
 
         return True
+    
+    def getTotalNodes(self):
+        return self.totalNodes
+    
+    def getRoot(self):
+        return self.root
+    
+    
+
+
+

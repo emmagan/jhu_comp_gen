@@ -41,7 +41,7 @@ def parse_file(file):
     order = []
     first_line = fh.readline()
     name = first_line.rstrip() # Ordering
-    assert(name == "Ordering")
+    assert(len(name) == 0 or name == "Ordering")
 
     while True:
         line = fh.readline().rstrip()

@@ -13,6 +13,8 @@ def check_first_node(graph):
             graph.nodes[node]['color'] = 'tab:blue' if order[node] == 0 else 'red'
             return order[node] == 0
         
+# NAIVE APPROACH
+
 #checks the second and third property of Wheeler Graph
 #returns true if for any pair of edges e = (u, v) and e' = (u', v')
 #labeled a and a' respectively, a < a' => v < v' and (a = a') ^ (u < u') => v <= v'
@@ -43,6 +45,8 @@ def check_edge_pairs(graph):
                     nx.set_node_attributes(graph, values={c: 'tab:red' for k in [a,b] for c in k}, name='color')
                     return False
     return True
+
+# PARTITION APPROACH
 
 #checks the second and third property of Wheeler Graph by grouping
 #edges with the same labels together

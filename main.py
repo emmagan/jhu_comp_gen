@@ -1,19 +1,20 @@
 import argparse
 import itertools
 from CreateGraph import parse_file, create_network_graph
-from NaiveVerifier import check_first_node, check_edge_pairs
+from GraphVerifier import check_first_node, check_edge_pairs, check_edge_pairs_partition
 from visualize import visualize
 
-def ordering(file_path):
+def ordering(file_path, vis):
     input = parse_file(file_path)
     G = create_network_graph(input)
 
     is_wheeler = check_first_node(G) and check_edge_pairs(G)
-    visualize(G,input[2])
+    if vis:
+        visualize(G,input[2])
 
     return is_wheeler
 
-def no_ordering(file_path):
+def no_ordering(file_path, vis):
     V,E,order = parse_file(file_path)
     # ignore ordering in file
     G = create_network_graph((V,E,[]))
@@ -22,7 +23,8 @@ def no_ordering(file_path):
         for i in range(len(order)):
             G.nodes[order[i]]['order'] = i
         is_wheeler = check_first_node(G) and check_edge_pairs(G)
-        visualize(G,order)
+        if vis:
+            visualize(G,order)
         if is_wheeler:
             break
 
@@ -32,10 +34,11 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-p', '--path', dest='path', help='Input file path name')
 parser.add_argument('-o', '--order', dest='order', action='store_true', help='Use ordering given in file')
 parser.add_argument('-n', '--no-order', dest='order', action='store_false', help='Compute ordering (ignore file ordering)')
-parser.set_defaults(order=True)
+parser.add_argument('-nv', '--no-vis', dest='vis', action='store_false', help='No visualization')
+parser.set_defaults(order=True,vis=True)
 args = parser.parse_args()
 
 if args.order:
-    print(ordering(args.path))
+    print(ordering(args.path, args.vis))
 else:
-    print(no_ordering(args.path))
+    print(no_ordering(args.path, args.vis))

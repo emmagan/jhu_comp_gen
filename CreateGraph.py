@@ -61,9 +61,7 @@ def create_network_graph(graph):
     G.add_nodes_from(V)
     G.add_edges_from(E)
     
-    # set color attribute
-    nx.set_edge_attributes(G,'black',name='color')
-    nx.set_node_attributes(G,'tab:blue',name='color')
+    reset_color(G)
 
     # if order exists, add it as a node attribute
     for i in range(len(order)):
@@ -79,3 +77,14 @@ if __name__ == "__main__":
 
         print(G.nodes.data())
         print(G.edges.data())
+
+## Graph Helpers
+
+def get_ordering(G):
+    order = [n for n,_ in (sorted(G.nodes(data=True), key=lambda x: x[1]['order']))]
+    return order
+
+def reset_color(G):
+    # set color attribute
+    nx.set_edge_attributes(G,'black',name='color')
+    nx.set_node_attributes(G,'tab:blue',name='color')

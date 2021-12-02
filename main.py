@@ -1,8 +1,9 @@
 import argparse
 import itertools
-from CreateGraph import parse_file, create_network_graph
+import math
+from CreateGraph import parse_file, create_network_graph, get_ordering, reset_color
 from GraphVerifier import check_first_node, check_edge_pairs, check_edge_pairs_partition
-from visualize import visualize
+from visualize import vis_multiple, vis_single
 
 def ordering(file_path, vis, approach):
     input = parse_file(file_path)
@@ -13,7 +14,7 @@ def ordering(file_path, vis, approach):
     else:
         is_wheeler = check_first_node(G) and check_edge_pairs_partition(G)
     if vis:
-        visualize(G,input[2])
+        vis_single(G,input[2])
 
     return is_wheeler
 
@@ -22,7 +23,30 @@ def no_ordering(file_path, vis, approach):
     # ignore ordering in file
     G = create_network_graph((V,E,[]))
 
-    for order in itertools.permutations(V):
+    if vis:
+        # visualization
+        # press q to quit visualization
+        v = vis_multiple(G, generator, approach)
+
+        # if we broke out of the generator, we just have to check the last iteration to see if the final graph is wheeler
+        if approach == 'naive':
+            is_wheeler = check_first_node(G) and check_edge_pairs(G)
+        else:
+            is_wheeler = check_first_node(G) and check_edge_pairs_partition(G)
+    else:
+        is_wheeler = any(generator(G,approach))
+    
+    return get_ordering(G) if is_wheeler else is_wheeler
+
+# Encapsulate all side effects into this generator.
+# This iterates through all permutations of orderings and
+# updates the color and order labels in the graph.
+# We can't use a regular function here because of how we are
+# animating multiple graphs.
+def generator(G,approach):
+    for order in itertools.permutations(G.nodes):
+        reset_color(G)
+
         for i in range(len(order)):
             G.nodes[order[i]]['order'] = i
 
@@ -31,12 +55,9 @@ def no_ordering(file_path, vis, approach):
         else:
             is_wheeler = check_first_node(G) and check_edge_pairs_partition(G)
 
-        if vis:
-            visualize(G,order)
+        yield is_wheeler
         if is_wheeler:
             break
-
-    return is_wheeler
     
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

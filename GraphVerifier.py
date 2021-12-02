@@ -97,5 +97,3 @@ def check_edge_pairs_partition(graph):
                     return False
 
     return True
-
-    

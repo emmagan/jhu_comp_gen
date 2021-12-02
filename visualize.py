@@ -3,26 +3,24 @@ from functools import partial
 import networkx as nx
 
 # single ordering
-def vis_single(G, order):
+def vis_single(G):
     fig, ax = plt.subplots()
     pos = nx.spring_layout(G)
-    title = 'Order: '+ ' '.join(order)
-    update(0, G,pos,ax,title)
+    update(0,G,pos,ax)
     plt.show()
 
 # multiple orderings -> animation
 def vis_multiple(G, generator, approach):
     fig, ax = plt.subplots()
     pos = nx.spring_layout(G)
-    title = 'Order: '#+ ' '.join(order)
-    ani = animation.FuncAnimation(fig, update, frames=partial(generator,G,approach), fargs=(G, pos, ax, title), repeat=False)
+    ani = animation.FuncAnimation(fig, update, frames=partial(generator,G,approach), fargs=(G, pos, ax), repeat=False)
     plt.show()
     return ani
 
 #https://networkx.org/documentation/stable/reference/generated/networkx.drawing.nx_pylab.draw_networkx_labels.html#networkx.drawing.nx_pylab.draw_networkx_labels
-def update(i,G,pos,ax,title): 
+def update(i,G,pos,ax): 
     # set axis title
-    ax.set_title('Order: '+ title)
+    ax.set_title('Order: '+G.graph['order'])
 
     # get unique groups
     node_colors = nx.get_node_attributes(G,'color').values()

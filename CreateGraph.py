@@ -66,6 +66,10 @@ def create_network_graph(graph):
     # if order exists, add it as a node attribute
     for i in range(len(order)):
         G.nodes[order[i]]['order'] = i
+    
+    # add stringified order as graph attribute
+    G.graph['order'] = ' '.join(order)
+
     return G
 
 if __name__ == "__main__":

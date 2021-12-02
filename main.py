@@ -14,7 +14,7 @@ def ordering(file_path, vis, approach):
     else:
         is_wheeler = check_first_node(G) and check_edge_pairs_partition(G)
     if vis:
-        vis_single(G,input[2])
+        vis_single(G)
 
     return is_wheeler
 
@@ -49,6 +49,8 @@ def generator(G,approach):
 
         for i in range(len(order)):
             G.nodes[order[i]]['order'] = i
+
+        G.graph['order'] = ' '.join(order)
 
         if approach == 'naive':
             is_wheeler = check_first_node(G) and check_edge_pairs(G)

@@ -1,30 +1,39 @@
 import argparse
 import itertools
-import math
+import logging
 from CreateGraph import parse_file, create_network_graph, get_ordering, reset_color
 from GraphVerifier import check_first_node, check_edge_pairs, check_edge_pairs_partition
 from visualize import vis_multiple, vis_single
 
 def ordering(file_path, vis, approach):
+    logging.info('Parsing input file')
     input = parse_file(file_path)
+
+    logging.info('Creating networkx graph')
     G = create_network_graph(input)
 
+    logging.info('Checking ordering')
     if approach == 'naive':
         is_wheeler = check_first_node(G) and check_edge_pairs(G)
     else:
         is_wheeler = check_first_node(G) and check_edge_pairs_partition(G)
+    
+    logging.info('Creating visualization')
     if vis:
         vis_single(G)
 
     return is_wheeler
 
 def no_ordering(file_path, vis, approach):
+    logging.info('Parsing input file')
     V,E,order = parse_file(file_path)
+
+    logging.info('Creating networkx graph')
     # ignore ordering in file
     G = create_network_graph((V,E,[]))
 
     if vis:
-        # visualization
+        logging.info('Creating visualization')
         # press q to quit visualization
         v = vis_multiple(G, generator, approach)
 
@@ -34,6 +43,7 @@ def no_ordering(file_path, vis, approach):
         else:
             is_wheeler = check_first_node(G) and check_edge_pairs_partition(G)
     else:
+        logging.info('Checking ordering')
         is_wheeler = any(generator(G,approach))
     
     return get_ordering(G) if is_wheeler else is_wheeler
@@ -62,6 +72,7 @@ def generator(G,approach):
             break
     
 if __name__ == '__main__':
+    logging.basicConfig(format='%(asctime)s %(levelname)s:%(message)s', level=logging.INFO)
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--path', dest='path', help='Input file path name')
     parser.add_argument('-no', '--no-order', dest='order', action='store_false', help='Compute ordering (ignore file ordering)')

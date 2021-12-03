@@ -11,6 +11,8 @@ for line in dna_lines:
     line = line.strip('\n')
     trie.insert(line)
 
+trie.getOrdering()
+
 # output wheeler graph - no ordering
 graph = open(sys.argv[2], "w")
 graph.write("V\n")
@@ -35,7 +37,14 @@ while len(queue) > 0:
         queue.append(children[c])
         count += 1
 
-    graph.write("\n")
+    if len(children) > 0:
+        graph.write("\n")
+
+graph.write("\nOrdering\n")
+
+for i in range(trie.getTotalNodes()):
+    graph.write(str(i) + " ")
+
 
 graph.close()
 dna.close()

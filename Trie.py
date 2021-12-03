@@ -3,6 +3,7 @@ class Node:
         self.edge = edgeVal
         self.key = 0
         self.children = {}
+        self.backwardString = None
     
     def getChildren(self):
         return self.children
@@ -12,11 +13,16 @@ class Node:
     
     def getKey(self):
         return self.key
+    
+    def getBString(self):
+        return self.backwardString
 class Trie:
     def __init__(self):
         # sentinel node
         self.root = Node('$')
+        self.root.backwardString = "$"
         self.totalNodes = 1
+        self.nodeList = [self.root]
         
     def insert(self, word: str) -> None:
         if word == None or len(word) == 0:
@@ -25,11 +31,16 @@ class Trie:
         # traverse down tree until we find a mismatch or string ends
         node = self.root
         word = word + "$" # $ is so we know where the string ends
+        
         for w in word:
             if w not in node.children:
                 newNode = Node(w)
                 newNode.key = self.totalNodes
+                newNode.backwardString = w + node.backwardString
                 self.totalNodes += 1
+
+                self.nodeList.append(newNode)
+
                 node.children[w] = newNode
                 node = newNode
             else:
@@ -57,6 +68,17 @@ class Trie:
     
     def getRoot(self):
         return self.root
+    
+    def getOrdering(self):
+        sortedNodes = sorted(self.nodeList, key=lambda x: x.backwardString)
+        count = 0
+        for node in sortedNodes:
+            node.key = count
+            count += 1
+    
+    
+    
+    
     
     
 

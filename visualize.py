@@ -18,7 +18,7 @@ def vis_multiple(G, generator, approach):
     return ani
 
 #https://networkx.org/documentation/stable/reference/generated/networkx.drawing.nx_pylab.draw_networkx_labels.html#networkx.drawing.nx_pylab.draw_networkx_labels
-def update(i,G,pos,ax): 
+def update(i,G,pos,ax):
     # clear old axis and set axis title
     ax.clear()
     ax.set_title('Order: '+G.graph['order'])

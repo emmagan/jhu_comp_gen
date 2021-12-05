@@ -1,6 +1,8 @@
 import argparse
 import itertools
 import logging
+import math
+from tqdm import tqdm
 from CreateGraph import parse_file, create_network_graph, get_ordering, reset_color
 from GraphVerifier import check_first_node, check_edge_pairs, check_edge_pairs_partition
 from visualize import vis_multiple, vis_single
@@ -54,7 +56,7 @@ def no_ordering(file_path, vis, approach):
 # We can't use a regular function here because of how we are
 # animating multiple graphs.
 def generator(G,approach):
-    for order in itertools.permutations(G.nodes):
+    for order in tqdm(itertools.permutations(G.nodes), total=math.factorial(len(G.nodes))):
         reset_color(G)
 
         for i in range(len(order)):

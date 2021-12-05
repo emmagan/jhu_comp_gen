@@ -55,6 +55,9 @@ def check_edge_pairs_partition(graph):
     order = nx.get_node_attributes(graph, 'order')
     edge_label_map = {}
     
+    #groups edges with the same labels together in a map,
+    #where the keys are the labels, and the values are sets of
+    #edges with the same labels
     for edge in all_edges:
         label = graph[edge[0]][edge[1]]['label']
         if label not in edge_label_map:
@@ -88,6 +91,7 @@ def check_edge_pairs_partition(graph):
         else:
             label_2 = label_pair[0]
             label_1 = label_pair[1] 
+        #iterate through all edge pairs with label_1 and label_2 in the map
         for a in edge_label_map[label_1]:
             for b in edge_label_map[label_2]:
                 if order[a[1]] >= order[b[1]]:

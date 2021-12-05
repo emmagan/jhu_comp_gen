@@ -1,7 +1,7 @@
 class Node:
     def __init__(self, edgeVal):
         self.edge = edgeVal
-        self.key = 0
+        self.vertex = 0
         self.children = {}
         self.backwardString = None
     
@@ -11,8 +11,8 @@ class Node:
     def getEdge(self):
         return self.edge 
     
-    def getKey(self):
-        return self.key
+    def getVertex(self):
+        return self.vertex
     
     def getBString(self):
         return self.backwardString
@@ -35,7 +35,7 @@ class Trie:
         for w in word:
             if w not in node.children:
                 newNode = Node(w)
-                newNode.key = self.totalNodes
+                newNode.vertex = self.totalNodes
                 newNode.backwardString = w + node.backwardString
                 self.totalNodes += 1
 
@@ -73,7 +73,7 @@ class Trie:
         sortedNodes = sorted(self.nodeList, key=lambda x: x.backwardString)
         count = 0
         for node in sortedNodes:
-            node.key = count
+            node.vertex = count
             count += 1
     
     

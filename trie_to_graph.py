@@ -33,7 +33,7 @@ while len(queue) > 0:
         if count > 0:
             graph.write(" ")
         
-        graph.write("(" + str(node.key) + ", " + str(children[c].key) + ", " + str(children[c].edge) + ")")
+        graph.write("(" + str(node.vertex) + ", " + str(children[c].vertex) + ", " + str(children[c].edge) + ")")
         queue.append(children[c])
         count += 1
 
@@ -44,7 +44,6 @@ graph.write("\nOrdering\n")
 
 for i in range(trie.getTotalNodes()):
     graph.write(str(i) + " ")
-
 
 graph.close()
 dna.close()

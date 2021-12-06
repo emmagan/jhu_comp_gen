@@ -32,8 +32,8 @@ for fname in dirs:
     if len(input[2]) == 0:
         notime = potime = None
     else:
-        ntime = timeit(partial(no_ordering, input, False, 'naive'), number=10) # args are path, vis, approach
-        ptime = timeit(partial(no_ordering, input, False, 'partition'), number=10)
+        notime = timeit(partial(ordering, input, False, 'naive'), number=10) # args are path, vis, approach
+        potime = timeit(partial(ordering, input, False, 'partition'), number=10)
 
     if len(input[0]) < 390:
         ntime = timeit(partial(no_ordering, input, False, 'naive'), number=10) # args are path, vis, approach

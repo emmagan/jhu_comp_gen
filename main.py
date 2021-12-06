@@ -50,7 +50,13 @@ def no_ordering(input, vis, approach):
 # We can't use a regular function here because of how we are
 # animating multiple graphs.
 def generator(G,approach):
-    for order in tqdm(itertools.permutations(G.nodes), total=math.factorial(len(G.nodes))):
+    if len(G.nodes) < 170: # 170 is the min before we get an overflow error
+        iterator = tqdm(itertools.permutations(G.nodes), total=math.factorial(len(G.nodes)))
+    else:
+        logging.warning('Simplified progress bar shown due to large total number of iterations')
+        iterator = tqdm(itertools.permutations(G.nodes))
+
+    for order in iterator:
         reset_color(G)
 
         for i in range(len(order)):

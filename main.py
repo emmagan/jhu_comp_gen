@@ -7,7 +7,7 @@ from CreateGraph import parse_file, create_network_graph, get_ordering, reset_co
 from GraphVerifier import check_first_node, check_edge_pairs, check_edge_pairs_partition
 from visualize import vis_multiple, vis_single
 
-def ordering(input, vis, approach, save):
+def ordering(input, vis, approach, save=""):
     logging.info('Creating networkx graph')
     G = create_network_graph(input)
 
@@ -23,7 +23,7 @@ def ordering(input, vis, approach, save):
 
     return is_wheeler
 
-def no_ordering(input, vis, approach, save):
+def no_ordering(input, vis, approach, save=""):
     logging.info('Creating networkx graph')
     # ignore ordering in file
     G = create_network_graph(input)

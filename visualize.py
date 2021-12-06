@@ -13,14 +13,14 @@ def vis_single(G):
 def vis_multiple(G, generator, approach):
     fig, ax = plt.subplots()
     pos = nx.spring_layout(G)
-    ani = animation.FuncAnimation(fig, update, frames=partial(generator,G,approach), fargs=(G, pos, ax), repeat=False)
+    ani = animation.FuncAnimation(fig, update, frames=partial(generator,G,approach), fargs=(G, pos, ax), repeat=False, save_count=473)
 
-    
-    # This is how to save the animation as a gif
+    '''
+    # This saves the animation as a gif
     f = 'images/trie.gif'
     writergif = animation.PillowWriter(fps=30) 
     ani.save(f, writer=writergif)
-    
+    '''
 
     plt.show()
     return ani

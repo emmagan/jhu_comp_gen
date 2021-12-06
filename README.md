@@ -69,6 +69,18 @@ Folder [images](images) contains all images used for our report.
 
 Files [Trie](Trie.py), [trie-to-graph](trie_to_graph.py), and [generate_dna_input](generate_dna_input.py) are used to create tries
 
+-  `generate_data_input.py` can be run with the following command
+
+  ```python3 generate_data_input a b input.txt``` 
+
+  where `a` is the desired number of lines and `b` is the number of characters per line and input.txt is the name of the input file to be generated.
+
+- `trie_to_graph.py` can be run with the following command
+
+  ```python3 trie_to_graph.py input.txt output.txt ```
+
+  which reads the given input file `input.txt`, inserts the lines of the input file into a Trie, and outputs the Trie into the desired graph output file called `output.txt`
+
 File [CreateGraph](CreateGraph.py) reads in a text file and outputs a NetworkX graph representation
 
 File [GraphVerifier](GraphVerifier.py) takes in a NetworkX graph with a given ordering and verifies if it is Wheeler, using either the naive or partition approach.

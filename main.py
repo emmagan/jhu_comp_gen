@@ -7,7 +7,7 @@ from CreateGraph import parse_file, create_network_graph, get_ordering, reset_co
 from GraphVerifier import check_first_node, check_edge_pairs, check_edge_pairs_partition
 from visualize import vis_multiple, vis_single
 
-def ordering(input, vis, approach):
+def ordering(input, vis, approach, save):
     logging.info('Creating networkx graph')
     G = create_network_graph(input)
 
@@ -19,11 +19,11 @@ def ordering(input, vis, approach):
     
     if vis:
         logging.info('Creating visualization')
-        vis_single(G)
+        vis_single(G, save)
 
     return is_wheeler
 
-def no_ordering(input, vis, approach):
+def no_ordering(input, vis, approach, save):
     logging.info('Creating networkx graph')
     # ignore ordering in file
     G = create_network_graph(input)
@@ -31,7 +31,7 @@ def no_ordering(input, vis, approach):
     if vis:
         logging.info('Creating animation visualization')
         # press q to quit visualization
-        v = vis_multiple(G, generator, approach)
+        v = vis_multiple(G, generator, approach, save)
 
         # if we broke out of the generator, we just have to check the last iteration to see if the final graph is wheeler
         if approach == 'naive':
@@ -77,6 +77,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--path', dest='path', help='Input file path name', required=True)
     parser.add_argument('-a', '--approach', dest='approach', choices=['naive', 'partition'], help='Approach (either naive or approach)', required=True)
+    parser.add_argument('-s', '--output-path', dest='save', help='Output file path name for png or gif file (visualization must be on)', default="")
     parser.add_argument('-no', '--no-order', dest='order', default=True, action='store_false', help='Compute ordering (ignore file ordering)')
     parser.add_argument('-nv', '--no-vis', dest='vis', default=True, action='store_false', help='No visualization')
     parser.add_argument('-l', '--log', dest='log', default=1, help='Logging level 0=none 1=info (defaults to info level)')
@@ -89,6 +90,6 @@ if __name__ == '__main__':
     input = parse_file(args.path)
 
     if args.order and len(input[2]) != 0:
-        print(ordering(input, args.vis, args.approach))
+        print(ordering(input, args.vis, args.approach, args.save))
     else:
-        print(no_ordering(input, args.vis, args.approach))
+        print(no_ordering(input, args.vis, args.approach, args.save))

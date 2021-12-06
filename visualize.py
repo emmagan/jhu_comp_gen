@@ -3,24 +3,25 @@ from functools import partial
 import networkx as nx
 
 # single ordering
-def vis_single(G):
+def vis_single(G, fname):
     fig, ax = plt.subplots()
     pos = nx.spring_layout(G)
     update(0,G,pos,ax)
     plt.show()
+    if len(fname) != 0:
+        plt.savefig(fname)
 
 # multiple orderings -> animation
-def vis_multiple(G, generator, approach):
+def vis_multiple(G, generator, approach, f):
     fig, ax = plt.subplots()
     pos = nx.spring_layout(G)
+    # saving as a gif defaults to 100 frames, so update save_count if you want more frames included
     ani = animation.FuncAnimation(fig, update, frames=partial(generator,G,approach), fargs=(G, pos, ax), repeat=False, save_count=473)
 
-    '''
     # This saves the animation as a gif
-    f = 'images/trie.gif'
-    writergif = animation.PillowWriter(fps=30) 
-    ani.save(f, writer=writergif)
-    '''
+    if len(f) != 0:
+        writergif = animation.PillowWriter(fps=30) 
+        ani.save(f, writer=writergif)
 
     plt.show()
     return ani

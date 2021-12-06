@@ -25,7 +25,7 @@ There are two important files:
 2. [benchmark.py](###benchmark.py)
 
 ### main.py
-`main.py` runs a single simulation. It requires a `-p` input file path and `-a` approach type (`naive` or `partition`). The input file must be of our [custom file format](data/README.md). 
+`main.py` runs a single simulation. It requires a `-p` input file path and `-a` approach type (`naive` or `partition`). The input file must be of our [custom file format](data/README.md). Press `q` to quit the visualization.
 
 ```
 python main.py -p data/manual/wheeler.txt -a naive
@@ -35,6 +35,8 @@ The command above should produce this Wheeler graph
 ![Wheeler graph](images/wheeler-vis.png)
 
 If the input file doesn't contain an ordering to verify or the `-no` ignore-ordering flag is used, all possible orderings are checked.
+Otherwise, the program verifies the ordering in the input file.
+
 ```
 python main.py -p data/trie/trie.txt -a partition
 ```
@@ -42,10 +44,16 @@ The command above should produce this animation
 
 ![Animation](images/trie.gif)
 
-Optional parameters include the `-no` ignore-ordering flag, `-nv` no-visualization flag, and `-l` numeric log level.
+Optional parameters include the `-no` ignore-ordering flag, `-nv` no-visualization flag, `-l` numeric log level, and `-s` path to save the visualization to. Any customization of the saved file (e.g. number of frames saved in animation) must be done directly in the [visualize file](visualize.py)
 
 ### benchmark.py
-`benchmark.py` runs multiple simulations. It currently has hard-coded parameters and is used for benchmarking different approaches on different files. It saves the resulting dataframe in a csv file called `bench.csv`
+`benchmark.py` runs multiple simulations on [data/manual](data/manual) and [data/trie](data/trie). It is used for benchmarking different approaches on different files and creates a dataframe to be saved to a csv file called `bench.csv`
+
+```
+python benchmark.py
+```
+Calling `benchmark.py` with its default parameters overwrites the [csv file](benchmark/bench.csv).
+Optional parameters include `-p` output file path name, `-r` number of repetitions, `-m` maximum number of nodes in the manual graphs before skipping the file, `-t` maximum number of nodes in the tries before skipping the file.
 
 ## Structure
 ----------------------

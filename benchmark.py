@@ -44,5 +44,5 @@ for fname in dirs:
     data[fname] = [notime, potime, ntime, ptime]
 
 df = pd.DataFrame.from_dict(data, orient='index', columns=['naive-order', 'partition-order', 'naive', 'partition'])
-print(df)
+#print(df)
 df.to_csv('benchmark/bench.csv')  

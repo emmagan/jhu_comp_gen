@@ -21,6 +21,7 @@ def ordering(input, vis, approach, save=""):
         logging.info('Creating visualization')
         vis_single(G, save)
 
+    logging.info('Done')
     return is_wheeler
 
 def no_ordering(input, vis, approach, save=""):
@@ -42,6 +43,7 @@ def no_ordering(input, vis, approach, save=""):
         logging.info('Checking orderings')
         is_wheeler = any(generator(G,approach))
     
+    logging.info('Done')
     return get_ordering(G) if is_wheeler else is_wheeler
 
 # Encapsulate all side effects into this generator.

@@ -1,6 +1,19 @@
 import networkx as nx
 import sys
 
+## Graph Helpers
+## --------------------------------------------------------------------------
+
+def get_ordering(G):
+    order = [n for n,_ in (sorted(G.nodes(data=True), key=lambda x: x[1]['order']))]
+    return order
+
+def reset_color(G):
+    # set color attribute
+    nx.set_edge_attributes(G,'black',name='color')
+    nx.set_node_attributes(G,'tab:blue',name='color')
+
+## --------------------------------------------------------------------------
 def parse_file(file):
     """ Parse wheeler graph (V,E,ordering) from a file path name. """
     # Open file handle
@@ -81,14 +94,3 @@ if __name__ == "__main__":
 
         print(G.nodes.data())
         print(G.edges.data())
-
-## Graph Helpers
-
-def get_ordering(G):
-    order = [n for n,_ in (sorted(G.nodes(data=True), key=lambda x: x[1]['order']))]
-    return order
-
-def reset_color(G):
-    # set color attribute
-    nx.set_edge_attributes(G,'black',name='color')
-    nx.set_node_attributes(G,'tab:blue',name='color')

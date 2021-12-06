@@ -53,7 +53,7 @@ Optional parameters include the `-no` ignore-ordering flag, `-nv` no-visualizati
 python benchmark.py
 ```
 Calling `benchmark.py` with its default parameters overwrites the [csv file](benchmark/bench.csv).
-Optional parameters include `-p` output file path name, `-r` number of repetitions, `-m` maximum number of nodes in the manual graphs before skipping the file, `-t` maximum number of nodes in the tries before skipping the file.
+Optional parameters include `-p` output file path name, `-r` number of repetitions, `-m` maximum number of nodes in the manual graphs before skipping the file, `-t` trie files to skip, and `-l` numeric log level
 
 ## Structure
 ----------------------

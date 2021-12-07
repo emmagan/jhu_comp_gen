@@ -1,4 +1,4 @@
-﻿Graph_name,V,E
+name,V,E
 nonwheeler2,12,13
 nonwheeler3,6,7
 nonwheeler4,6,6
@@ -6,7 +6,7 @@ nonwheeler5,10,9
 nonwheeler6,11,11
 nonwheelersmall,3,3
 wheeler,8,13
-wheeeler2,3,3
+wheeler2,3,3
 wheeler3,5,4
 wheeler4,6,5
 wheeler5,10,10

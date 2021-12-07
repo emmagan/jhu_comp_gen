@@ -79,10 +79,6 @@ Files [Trie](Trie.py), [trie-to-graph](trie_to_graph.py), and [generate_dna_inpu
 
   ```python3 trie_to_graph.py input.txt output.txt ```
  
- ## Administrative
- -------------------
-Contributions.pdf contains a detailed description of who contributed what to this project. 
-
   which reads the given input file `input.txt`, inserts the lines of the input file into a Trie, and outputs the Trie into the desired graph output file called `output.txt`
 
 File [CreateGraph](CreateGraph.py) reads in a text file and outputs a NetworkX graph representation
@@ -92,4 +88,8 @@ File [GraphVerifier](GraphVerifier.py) takes in a NetworkX graph with a given or
 File [visualize](visualize.py) contains all the drawing-related functions
 
 File [main](main.py) and [benchmark](benchmark.py) house the main driver code and the benchmarking suite.
+
+## Administrative
+ -------------------
+Contributions.pdf contains a detailed description of who contributed what to this project. 
 

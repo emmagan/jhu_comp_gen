@@ -78,6 +78,10 @@ Files [Trie](Trie.py), [trie-to-graph](trie_to_graph.py), and [generate_dna_inpu
 - `trie_to_graph.py` can be run with the following command
 
   ```python3 trie_to_graph.py input.txt output.txt ```
+ 
+ ## Administrative
+ -------------------
+Contributions.pdf contains a detailed description of who contributed what to this project. 
 
   which reads the given input file `input.txt`, inserts the lines of the input file into a Trie, and outputs the Trie into the desired graph output file called `output.txt`
 
